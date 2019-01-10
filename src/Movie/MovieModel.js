@@ -1,0 +1,41 @@
+const mongoose = require('mongoose');
+
+const Schema = new mongoose.Schema({
+  adult: Boolean,
+  backdrop_path: String,
+  belongs_to_collection: Object,
+  budget: Number,
+  genres: [{ type: mongoose.SchemaTypes.ObjectId, ref: 'Genre' }],
+  homepage: String,
+  id: Number,
+  imdb_id: String,
+  original_language: String,
+  original_title: String,
+  overview: String,
+  popularity: Number,
+  poster_path: String,
+  production_companies: [Object],
+  production_countries: [Object],
+  release_date: String,
+  revenue: Number,
+  runtime: Number,
+  spoken_languages: [{ type: mongoose.SchemaTypes.ObjectId, ref: 'Language' }],
+  status: String,
+  tagline: String,
+  title: String,
+  trailers: [{
+    id: { type: String },
+    iso_639_1: { type: String },
+    iso_3166_1: { type: String },
+    key: { type: String },
+    name: { type: String },
+    site: { type: String },
+    size: { type: Number },
+    type: { type: String },
+  }],
+  video: Boolean,
+  vote_average: Number,
+  vote_count: Number,
+});
+
+module.exports = mongoose.model('Movie', Schema);
