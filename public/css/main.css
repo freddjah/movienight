@@ -1,0 +1,17 @@
+body {
+  background-image: url('https://images8.alphacoders.com/560/560736.jpg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+ul.inline-list {
+  text-transform: uppercase;
+  list-style-type: none;
+  padding-inline-start: 0;
+}
+
+li.inline-list {
+  display: inline;
+  margin-right: 5px;
+}

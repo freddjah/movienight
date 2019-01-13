@@ -1,5 +1,6 @@
 const createMovie = MovieDAL => movieObject => MovieDAL.create(movieObject);
 const getMovieById = MovieDAL => id => MovieDAL.findOne({ id });
+const populateMovie = MovieDAL => movieObject => MovieDAL.populate(movieObject, 'genres spoken_languages');
 
 /**
  * Uses dependency injection to act as a middle-man between a calling service
@@ -13,4 +14,5 @@ const getMovieById = MovieDAL => id => MovieDAL.findOne({ id });
 module.exports = MovieDAL => ({
   createMovie: createMovie(MovieDAL),
   getMovieById: getMovieById(MovieDAL),
+  populateMovie: populateMovie(MovieDAL),
 });

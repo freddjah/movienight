@@ -9,6 +9,30 @@ const GenreService = require('../Genre/GenreService')(Genre);
 
 const TMDBApiService = require('./api/TheMovieDatabase/APIService');
 
+const findOrCreateLanguages = async (languagesFromAPI) => {
+  const languages = [];
+
+  await Promise.all(languagesFromAPI.map(async (languageEntry) => {
+    const language = await LanguageService.findOrCreateLanguage(languageEntry);
+
+    languages.push(language);
+  }));
+
+  return languages;
+};
+
+const findOrCreateGenres = async (genresFromAPI) => {
+  const genres = [];
+
+  await Promise.all(genresFromAPI.map(async (genreEntry) => {
+    const genre = await GenreService.findOrCreateGenre(genreEntry);
+
+    genres.push(genre);
+  }));
+
+  return genres;
+};
+
 module.exports.find = async (req, res) => {
   const { title } = req.query;
 
@@ -26,20 +50,8 @@ module.exports.showMovieDetailPage = async (req, res) => {
     const apiMovie = await TMDBApiService.getMovie(id);
     const apiTrailers = await TMDBApiService.getTrailers(id);
 
-    const languages = [];
-    const genres = [];
-
-    await Promise.all(apiMovie.spoken_languages.map(async (languageEntry) => {
-      const language = await LanguageService.findOrCreateLanguage(languageEntry);
-
-      languages.push(language);
-    }));
-
-    await Promise.all(apiMovie.genres.map(async (genreEntry) => {
-      const genre = await GenreService.findOrCreateGenre(genreEntry);
-
-      genres.push(genre);
-    }));
+    const languages = await findOrCreateLanguages(apiMovie.spoken_languages);
+    const genres = await findOrCreateGenres(apiMovie.genres);
 
     apiMovie.spoken_languages = languages;
     apiMovie.genres = genres;
@@ -48,5 +60,7 @@ module.exports.showMovieDetailPage = async (req, res) => {
     movie = await MovieService.createMovie(apiMovie);
   }
 
-  return res.send(movie);
+  const populatedMovie = await MovieService.populateMovie(movie);
+
+  return res.render('movie/details', { movie: populatedMovie });
 };
