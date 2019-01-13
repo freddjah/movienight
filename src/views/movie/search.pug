@@ -1,0 +1,11 @@
+extends ../layout
+
+block content
+  div.col-lg-12.bg-light.p-4
+    h1 Results
+    div.row.equal
+      each movie in movies
+        div.col-xs-12.col-sm-6.col-md-4.mb-4
+          a(href=`/movies/${movie.id}`)
+            img(src=`https://image.tmdb.org/t/p/w780${movie.poster_path}`, alt=`${movie.title} - Poster`).img-thumbnail
+    

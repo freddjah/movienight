@@ -38,7 +38,8 @@ module.exports.find = async (req, res) => {
 
   const movies = await TMDBApiService.searchMovies(title);
 
-  res.send(movies);
+  res.render('movie/search', { movies: movies.results });
+  // res.send(movies);
 };
 
 module.exports.showMovieDetailPage = async (req, res) => {
