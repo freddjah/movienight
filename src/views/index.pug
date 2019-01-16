@@ -1,16 +1,21 @@
 extends layout
 
 block content
+  p=lists
   div.col-sm-12
     div.row
-      div.col-sm-12.p-3.mb-3.bg-moviewhite
-        div.container
-          div.row
-            h3.text-moviered Popular
-          div.row
-            p Movies here
-          div.row.float-right  
-            button.btn.btn-dark.btn-sm Browse more...
+      each list in lists
+        if (list)
+          div.col-sm-12.p-3.mb-3.bg-moviewhite
+            div.container
+              div.row
+                h3.text-moviered=list.name
+              div.row
+                if (list.movies.length > 0)
+                  each movie in list.movies
+                    p=movie
+              div.row.float-right  
+                button.btn.btn-dark.btn-sm Browse more...
 
       div.col-sm-12.p-3.mb-3.bg-moviewhite
         div.container

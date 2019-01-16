@@ -3,9 +3,12 @@ const mongoose = require('mongoose');
 const Movie = mongoose.model('Movie');
 const Language = mongoose.model('Language');
 const Genre = mongoose.model('Genre');
+const List = mongoose.model('List');
+
 const MovieService = require('./MovieService')(Movie);
 const LanguageService = require('../Language/LanguageService')(Language);
 const GenreService = require('../Genre/GenreService')(Genre);
+const ListService = require('../List/ListService')(List);
 
 const TMDBApiService = require('./api/TheMovieDatabase/APIService');
 
@@ -67,12 +70,11 @@ module.exports.showMovieDetailPage = async (req, res) => {
 };
 
 module.exports.index = async (req, res) => {
-  const popularMovies = [];
-  const topRatedMovies = [];
-  const upcomingMovies = [];
-  const highestGrossingMovies = [];
+  const popularList = await ListService.findByName('popular');
+  const topRatedList = await ListService.findByName('top_rated');
+  const upcomingList = await ListService.findByName('upcoming');
 
   res.render('index', {
-    popularMovies, topRatedMovies, upcomingMovies, highestGrossingMovies,
+    lists: [popularList, topRatedList, upcomingList],
   });
 };
