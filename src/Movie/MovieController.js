@@ -74,6 +74,9 @@ module.exports.index = async (req, res) => {
   const topRatedList = await ListService.findByName('top_rated');
   const upcomingList = await ListService.findByName('upcoming');
 
+  const list = await List.findOne({ name: 'popular' });
+  console.log(list);
+
   res.render('index', {
     lists: [popularList, topRatedList, upcomingList],
   });

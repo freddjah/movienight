@@ -27,18 +27,18 @@ module.exports.getPopularMovies = async () => {
   const url = `${baseURL}/movie/popular?api_key=${process.env.TMDB_KEY}&language=en-US&page=1`;
   const response = await axios.get(url);
 
-  return response.data;
+  return response.data.results;
 };
 
 module.exports.getTopRatedMovies = async () => {
   const url = `${baseURL}/movie/top_rated?api_key=${process.env.TMDB_KEY}&language=en-US&page=1`;
   const response = await axios.get(url);
 
-  return response.data;
+  return response.data.results;
 };
 
 module.exports.getUpcomingMovies = async () => {
-  const url = `${baseURL}/movie/upcoming?api_key=${process.env.TMDB_KEY}&language=en-US&page=1`;
+  const url = `${baseURL}/movie/upcoming?api_key=${process.env.TMDB_KEY}&language=en-US&page=1&region=US`;
   const response = await axios.get(url);
 
   return response.data.results;

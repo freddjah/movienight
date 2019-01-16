@@ -7,8 +7,15 @@ const Schema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  movieIds: [
-    { type: Number },
+  displayName: {
+    type: String,
+    required: true,
+  },
+  movies: [
+    {
+      id: { type: Number },
+      poster_path: { type: String },
+    },
   ],
 });
 
