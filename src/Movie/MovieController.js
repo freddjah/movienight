@@ -65,3 +65,14 @@ module.exports.showMovieDetailPage = async (req, res) => {
 
   return res.render('movie/details', { movie: populatedMovie });
 };
+
+module.exports.index = async (req, res) => {
+  const popularMovies = [];
+  const topRatedMovies = [];
+  const upcomingMovies = [];
+  const highestGrossingMovies = [];
+
+  res.render('index', {
+    popularMovies, topRatedMovies, upcomingMovies, highestGrossingMovies,
+  });
+};

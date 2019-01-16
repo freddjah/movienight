@@ -1,7 +1,7 @@
 extends ../layout
 
 block content
-  div.col-sm-12.col-lg-10.offset-lg-1.bg-light.p-3
+  div.col-sm-12.col-lg-10.offset-lg-1.bg-moviewhite.p-3
     div.row
       div.col-sm-12.col-lg-6
         img(src=`https://image.tmdb.org/t/p/w780${movie.poster_path}`, alt=`${movie.title} - Poster`).img-fluid
@@ -15,37 +15,37 @@ block content
           ul.inline-list.mt-3
             each genre in movie.genres
               li.inline-list
-                span.bg-info.badge.badge-secondary=`${genre.name}`
-
-        if (movie.spoken_languages.length)
-          ul.inline-list
-            each language in movie.spoken_languages
-              li.inline-list
-                span.badge.badge-secondary=`${language.iso_639_1}`
+                span.badge.badge-secondary.p-2=`${genre.name}`
         
-        h6 Runtime
+        h6.font-weight-bold.text-uppercase.text-moviered Runtime
         p=`${movie.runtime} minutes`
 
-        h6 Plot
+        h6.font-weight-bold.text-uppercase.text-moviered Plot
         p=movie.overview
 
-        h6 Budget
+        h6.font-weight-bold.text-uppercase.text-moviered Budget
         p=`${movie.budget} USD`
 
-        h6 Revenue
+        h6.font-weight-bold.text-uppercase.text-moviered Revenue
         p=`${movie.revenue} USD`
 
-        h6 Release date
+        h6.font-weight-bold.text-uppercase.text-moviered Release date
         p=movie.release_date
-        
-  div.col.sm-12.col-lg-10.offset-lg-1.bg-dark.p-3
-    div.text-white
-        if (movie.trailers)
-          h1 Trailers and clips
-          ul.inline-list.text-center.mt-3
-            each trailer in movie.trailers
-              if (trailer.site === "YouTube")
-                li.inline-list
-                  iframe(src=`https://www.youtube.com/embed/${trailer.key}` frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen)
 
-                
+        if (movie.spoken_languages.length)
+          h6.font-weight-bold.text-uppercase.text-moviered Spoken languages
+          ul.inline-list.mt-3
+            each language in movie.spoken_languages
+              li.inline-list
+                span.badge.badge-secondary.p-2=`${language.name}`
+        
+  div.col.sm-12.col-lg-10.offset-lg-1.bg-moviered.p-3
+      if (movie.trailers)
+        h3.text-moviewhite Trailers and clips
+        ul.inline-list.text-center.mt-3
+          each trailer in movie.trailers
+            if (trailer.site === "YouTube")
+              li.inline-list
+                iframe(src=`https://www.youtube.com/embed/${trailer.key}` frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen)
+
+              
