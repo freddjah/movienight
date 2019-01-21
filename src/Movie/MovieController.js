@@ -41,8 +41,7 @@ module.exports.find = async (req, res) => {
 
   const movies = await TMDBApiService.searchMovies(title);
 
-  res.render('movie/search', { movies: movies.results });
-  // res.send(movies);
+  res.render('movie/list', { list: { displayName: 'Search Results', movies: movies.results } });
 };
 
 module.exports.showMovieDetailPage = async (req, res) => {
@@ -74,10 +73,25 @@ module.exports.index = async (req, res) => {
   const topRatedList = await ListService.findByName('top_rated');
   const upcomingList = await ListService.findByName('upcoming');
 
-  const list = await List.findOne({ name: 'popular' });
-  console.log(list);
-
   res.render('index', {
     lists: [popularList, topRatedList, upcomingList],
   });
+};
+
+module.exports.popular = async (req, res) => {
+  const popularList = await ListService.findByName('popular');
+
+  res.render('movie/list', { list: popularList });
+};
+
+module.exports.top = async (req, res) => {
+  const topList = await ListService.findByName('top_rated');
+
+  res.render('movie/list', { list: topList });
+};
+
+module.exports.upcoming = async (req, res) => {
+  const upcomingList = await ListService.findByName('upcoming');
+
+  res.render('movie/list', { list: upcomingList });
 };

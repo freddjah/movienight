@@ -9,18 +9,21 @@ html(lang='en')
     link(rel='stylesheet' href='/css/main.css')
   body
     nav.navbar.navbar-expand-lg.navbar-dark.bg-moviered
-      a.navbar-brand(href='#') Movie Night
+      a.navbar-brand(href='/') Movie Night
       button.navbar-toggler(type='button' data-toggle='collapse' data-target='#navbarSupportedContent' aria-controls='navbarSupportedContent' aria-expanded='false' aria-label='Toggle navigation')
         span.navbar-toggler-icon
 
       #navbarSupportedContent.collapse.navbar-collapse
         ul.navbar-nav.mr-auto
-          li.nav-item.active
-            a.nav-link(href='#')
-              | Home 
-              span.sr-only (current)
           li.nav-item
-            a.nav-link(href='#') Link
+            a.nav-link(href='/movies/popular')
+              | Popular 
+          li.nav-item
+            a.nav-link(href='/movies/top_rated')
+              | Top Rated 
+          li.nav-item
+            a.nav-link(href='/movies/upcoming')
+              | Upcoming 
 
     div.container.mt-3
         form(action='/movies/find').col-sm-12.col-lg-10.offset-lg-1

@@ -2,9 +2,10 @@ extends ../layout
 
 block content
   div.col-lg-12.bg-light.p-4
-    h1 Results
+    h1=list.displayName
+    
     div.row.equal
-      each movie in movies
+      each movie in list.movies
         if (movie.poster_path)
           div.col-xs-12.col-sm-6.col-md-4.mb-4
             a(href=`/movies/${movie.id}`)

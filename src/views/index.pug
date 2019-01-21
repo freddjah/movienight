@@ -19,6 +19,7 @@ block content
                         a(href=`/movies/${movie.id}`)
                           img(src=`https://image.tmdb.org/t/p/w780${movie.poster_path}`).img-thumbnail
 
-              div.row.float-right  
-                button.btn.btn-dark.btn-sm Browse more...
+              div.row.float-right
+                a(href=`/movies/${list.name}`)  
+                  button.btn.btn-dark.btn-sm Browse more...
 
