@@ -11,9 +11,9 @@ module.exports = async () => {
   const upcomingList = await TMDBApiService.getUpcomingMovies();
   const topRatedList = await TMDBApiService.getTopRatedMovies();
 
-  popularList.map(movie => ({ id: movie.id, poster_path: movie.poster_path }));
-  upcomingList.map(movie => ({ id: movie.id, poster_path: movie.poster_path }));
-  topRatedList.map(movie => ({ id: movie.id, poster_path: movie.poster_path }));
+  popularList.map(movie => ({ title: movie.title, id: movie.id, poster_path: movie.poster_path }));
+  upcomingList.map(movie => ({ title: movie.title, id: movie.id, poster_path: movie.poster_path }));
+  topRatedList.map(movie => ({ title: movie.title, id: movie.id, poster_path: movie.poster_path }));
 
   await ListService.createList({ name: 'popular', displayName: 'Popular movies', movies: popularList });
   await ListService.createList({ name: 'upcoming', displayName: 'Upcoming movies', movies: upcomingList });

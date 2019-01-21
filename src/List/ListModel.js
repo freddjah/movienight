@@ -13,6 +13,7 @@ const Schema = new mongoose.Schema({
   },
   movies: [
     {
+      title: { type: String },
       id: { type: Number },
       poster_path: { type: String },
     },
